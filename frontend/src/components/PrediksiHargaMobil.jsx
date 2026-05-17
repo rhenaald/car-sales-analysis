@@ -84,7 +84,7 @@ const FEATURES = [
   },
 ];
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.VITE_API_URL || "";
 
 const AUTHOR = {
   nama: "Ikhwan Kurniawan Julianto",
@@ -166,7 +166,7 @@ export default function PrediksiHargaMobil() {
     );
 
     try {
-      const res = await fetch(`${API_URL}/predict`, {
+      const res = await fetch(`${API_URL}/api/predict`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
