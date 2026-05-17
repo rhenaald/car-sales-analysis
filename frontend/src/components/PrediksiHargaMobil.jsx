@@ -174,6 +174,10 @@ export default function PrediksiHargaMobil() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Gagal mendapat prediksi");
       setResult(data);
+
+      const data = await res.json();
+      console.log("API Response:", data); // ← lihat di console
+      setResult(data);
     } catch (err) {
       setSubmitError(
         err.message.includes("fetch")
@@ -367,13 +371,16 @@ export default function PrediksiHargaMobil() {
                 <div style={s.metricRow}>
                   <div style={s.metricChip}>
                     <span style={{ ...s.metricVal, color: "#4ade80" }}>
-                      {(result.model_info.r2_score * 100).toFixed(2)}%
+                      {((result.model_info?.r2_score ?? 0) * 100).toFixed(2)}%
                     </span>
                     <span style={s.metricLabel}>R²_SCORE</span>
                   </div>
                   <div style={s.metricChip}>
                     <span style={{ ...s.metricVal, color: "#fb923c" }}>
-                      ±${(result.model_info.rmse_thousands * 1000).toFixed(0)}
+                      ±$
+                      {(
+                        (result.model_info?.rmse_thousands ?? 0) * 1000
+                      ).toFixed(0)}
                     </span>
                     <span style={s.metricLabel}>RMSE_ERR</span>
                   </div>
@@ -381,11 +388,7 @@ export default function PrediksiHargaMobil() {
                     <span
                       style={{ ...s.metricVal, color: "#38bdf8", fontSize: 9 }}
                     >
-                      {result.model_info.model
-                        ? result.model_info.model
-                            .replace("Regressor", "")
-                            .trim()
-                        : "GB"}
+                      {result.model_info?.model ?? "GB"}
                     </span>
                     <span style={s.metricLabel}>MODEL_ID</span>
                   </div>
