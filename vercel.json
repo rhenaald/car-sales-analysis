@@ -1,4 +1,5 @@
 {
+  "version": 2,
   "builds": [
     {
       "src": "frontend/package.json",
@@ -6,12 +7,12 @@
       "config": { "distDir": "frontend/dist" }
     },
     {
-      "src": "backend/api.py",
+      "src": "api/*.py",
       "use": "@vercel/python"
     }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "backend/api.py" },
+    { "src": "/api/(.*)", "dest": "api/predict.py" },
     { "src": "/(.*)", "dest": "frontend/dist/$1" }
   ]
 }
