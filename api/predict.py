@@ -18,7 +18,7 @@ FEATURES = [
 TARGET = 'Price_in_thousands'
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DATA_PATH = os.path.join(BASE_DIR, '..', 'backend', 'Car_sales.xls')
+DATA_PATH = os.path.join(BASE_DIR, 'Car_sales.xls')
 
 df = pd.read_excel(DATA_PATH)
 df_dropped = df.dropna(subset=[TARGET])
