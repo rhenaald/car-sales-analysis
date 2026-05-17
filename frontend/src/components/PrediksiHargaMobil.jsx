@@ -174,10 +174,6 @@ export default function PrediksiHargaMobil() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Gagal mendapat prediksi");
       setResult(data);
-
-      const data = await res.json();
-      console.log("API Response:", data); // ← lihat di console
-      setResult(data);
     } catch (err) {
       setSubmitError(
         err.message.includes("fetch")
@@ -204,11 +200,6 @@ export default function PrediksiHargaMobil() {
       currency: "USD",
       maximumFractionDigits: 0,
     }).format(n);
-
-  const filledCount = FEATURES.filter(
-    (f) => values[f.key] !== "" && values[f.key] !== null,
-  ).length;
-  const progress = Math.round((filledCount / FEATURES.length) * 100);
 
   return (
     <div style={s.page}>
@@ -295,7 +286,6 @@ export default function PrediksiHargaMobil() {
                   <span style={s.spinner} />
                 ) : (
                   <>
-                    {" "}
                     RUN PREDICT <span style={s.submitArrow}>→</span>
                   </>
                 )}
@@ -448,8 +438,6 @@ const s = {
     minHeight: "100vh",
     color: C.text,
   },
-
-  // Header
   header: {
     background: C.surface,
     borderBottom: `1px solid ${C.cardBorder}`,
@@ -464,9 +452,8 @@ const s = {
     width: "100%",
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-between",
+    gap: 10,
   },
-  headerBrand: { display: "flex", alignItems: "center", gap: 10 },
   brandDot: {
     width: 10,
     height: 10,
@@ -474,115 +461,14 @@ const s = {
     background: C.accent,
     boxShadow: `0 0 10px ${C.accentGlow}`,
   },
-  brandName: { fontSize: 16, fontWeight: 700, color: C.text, letterSpacing: 2 },
-  brandAccent: { color: C.accent },
-  headerNav: { display: "flex", alignItems: "center", gap: 28 },
-  navItem: {
-    fontSize: 11,
-    color: C.textDim,
-    letterSpacing: 1.5,
-    cursor: "pointer",
-  },
-  navCta: {
-    fontSize: 11,
-    color: "#0d0d0d",
-    background: C.accent,
-    padding: "6px 14px",
-    letterSpacing: 1.5,
+  brandName: {
+    fontSize: 16,
     fontWeight: 700,
-    cursor: "pointer",
+    color: C.text,
+    letterSpacing: 2,
+    margin: 0,
   },
-
-  // Hero
-  hero: {
-    background: C.surface,
-    borderBottom: `1px solid ${C.cardBorder}`,
-    padding: "56px 32px 40px",
-  },
-  heroInner: {
-    maxWidth: 1200,
-    margin: "0 auto",
-    display: "flex",
-    gap: 48,
-    alignItems: "flex-start",
-    flexWrap: "wrap",
-  },
-  heroLeft: { flex: "1 1 380px" },
-  heroTitle: {
-    margin: "0 0 20px",
-    fontSize: 68,
-    fontWeight: 900,
-    lineHeight: 1,
-    color: "#fff",
-    letterSpacing: -2,
-    fontFamily: "'Courier New', monospace",
-  },
-  heroTitleMuted: { color: C.accent },
-  heroSub: {
-    margin: "0 0 28px",
-    fontSize: 13,
-    color: C.textMid,
-    lineHeight: 1.7,
-    maxWidth: 400,
-  },
-  progressWrap: { maxWidth: 360 },
-  progressHeader: {
-    display: "flex",
-    justifyContent: "space-between",
-    marginBottom: 6,
-  },
-  progressLabel: { fontSize: 10, color: C.textDim, letterSpacing: 1.5 },
-  progressPct: { fontSize: 10, color: C.accent, letterSpacing: 1 },
-  progressTrack: {
-    height: 3,
-    background: "#222",
-    borderRadius: 0,
-    overflow: "hidden",
-  },
-  progressBar: {
-    height: "100%",
-    background: C.accent,
-    transition: "width 0.4s ease",
-    boxShadow: `0 0 8px ${C.accentGlow}`,
-  },
-
-  heroRight: { flex: "1 1 420px" },
-  terminal: {
-    background: "#0a0a0a",
-    border: `1px solid ${C.cardBorder}`,
-    borderRadius: 6,
-    overflow: "hidden",
-    boxShadow: "0 20px 60px rgba(0,0,0,0.6)",
-  },
-  terminalHeader: {
-    background: "#1a1a1a",
-    padding: "10px 14px",
-    display: "flex",
-    alignItems: "center",
-    gap: 7,
-    borderBottom: `1px solid ${C.cardBorder}`,
-  },
-  termDot: {
-    width: 11,
-    height: 11,
-    borderRadius: "50%",
-  },
-  termTitle: {
-    fontSize: 11,
-    color: C.textDim,
-    marginLeft: 8,
-    letterSpacing: 0.5,
-  },
-  termBody: { padding: "14px 16px", minHeight: 120 },
-  termLine: {
-    fontSize: 12,
-    lineHeight: 2,
-    fontFamily: "'Courier New', monospace",
-    letterSpacing: 0.2,
-  },
-  cursor: { animation: "blink 1s step-end infinite" },
-
-  // Main
+  brandAccent: { color: C.accent },
   main: { padding: "32px 32px 60px" },
   mainInner: {
     maxWidth: 1200,
@@ -592,7 +478,6 @@ const s = {
     alignItems: "flex-start",
     flexWrap: "wrap",
   },
-
   leftCol: {
     flex: "1 1 520px",
     display: "flex",
@@ -605,7 +490,6 @@ const s = {
     flexDirection: "column",
     gap: 16,
   },
-
   sectionLabel: {
     display: "flex",
     alignItems: "center",
@@ -621,8 +505,6 @@ const s = {
     padding: "2px 7px",
   },
   sectionTitle: { fontSize: 11, color: C.textDim, letterSpacing: 1.5 },
-
-  // Fields
   fieldGrid: {
     display: "grid",
     gridTemplateColumns: "1fr 1fr",
@@ -650,7 +532,6 @@ const s = {
   labelText: { color: C.textMid, flex: 1 },
   labelUnit: { color: "#444", fontSize: 9 },
   checkmark: { color: C.green, fontSize: 10, marginLeft: "auto" },
-
   input: {
     width: "100%",
     boxSizing: "border-box",
@@ -688,7 +569,6 @@ const s = {
     color: "#3a3a3a",
     lineHeight: 1.5,
   },
-
   actionRow: { display: "flex", gap: 8 },
   resetBtn: {
     padding: "12px 20px",
@@ -743,8 +623,6 @@ const s = {
     lineHeight: 1.6,
     letterSpacing: 0.3,
   },
-
-  // Right col
   priceCard: {
     background: C.card,
     border: `1px solid ${C.cardBorder}`,
@@ -791,7 +669,6 @@ const s = {
     color: "#333",
     letterSpacing: 0.3,
   },
-
   summaryCard: {
     background: C.card,
     border: `1px solid ${C.cardBorder}`,
@@ -820,7 +697,6 @@ const s = {
     fontFamily: "monospace",
   },
   summaryUnit: { fontSize: 9, color: "#444", fontWeight: 400 },
-
   metricRow: { display: "flex", borderTop: `1px solid ${C.cardBorder}` },
   metricChip: {
     flex: 1,
@@ -834,7 +710,6 @@ const s = {
   },
   metricVal: { fontWeight: 900, fontSize: 12, fontFamily: "monospace" },
   metricLabel: { fontSize: 8, color: "#333", letterSpacing: 1 },
-
   authorCard: {
     background: C.card,
     border: `1px solid ${C.cardBorder}`,
@@ -859,10 +734,6 @@ const s = {
 };
 
 const css = `
-  .dot-red { background: #ff5f57 !important; }
-  .dot-yellow { background: #febc2e !important; }
-  .dot-green { background: #28c840 !important; }
-
   .field-input:focus {
     border-color: #a3e635 !important;
     box-shadow: 0 0 0 2px rgba(163,230,53,0.12) !important;
@@ -870,7 +741,6 @@ const css = `
   }
   .field-input::-webkit-outer-spin-button,
   .field-input::-webkit-inner-spin-button { -webkit-appearance: inner-spin-button; opacity: 0.3; }
-
   .submit-btn:hover:not(:disabled) {
     background: #bef264 !important;
     box-shadow: 0 0 36px rgba(163,230,53,0.35) !important;
@@ -879,24 +749,7 @@ const css = `
     border-color: #3a3a3a !important;
     color: #9ca3af !important;
   }
-
   .fade-in { animation: fadeIn 0.5s ease; }
   @keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
   @keyframes spin { to { transform: rotate(360deg); } }
-  @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
-
-  /* Scanline effect on hero */
-  section::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      rgba(0,0,0,0.03) 2px,
-      rgba(0,0,0,0.03) 4px
-    );
-  }
 `;

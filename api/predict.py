@@ -86,3 +86,6 @@ def info():
             "rmse_thousands": round(rmse, 4),
         }
     })
+
+# Required for Vercel
+handler = app

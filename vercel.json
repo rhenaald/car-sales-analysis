@@ -7,12 +7,12 @@
       "config": { "distDir": "frontend/dist" }
     },
     {
-      "src": "api/*.py",
+      "src": "api/predict.py",
       "use": "@vercel/python"
     }
   ],
   "routes": [
     { "src": "/api/(.*)", "dest": "api/predict.py" },
-    { "src": "/(.*)", "dest": "frontend/dist/$1" }
+    { "src": "/(.*)", "dest": "/$1" }
   ]
 }
